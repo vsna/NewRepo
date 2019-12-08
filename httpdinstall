@@ -1,0 +1,15 @@
+---
+ - hosts: grp1
+   become: true
+   tasks:
+     -  name: install httpd package
+        yum: name=httpd state=present
+
+     -  name: starting httpd service
+        service: name=httpd state=running enabled=yes
+
+     -  name: copying idex file
+        copy: src=/var/tmp/index.html dest=/var/www/index.html
+
+     -  name: restarting httpd
+        service: name=httpd state=restarted
